@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public record Main() {
     public static void main(String[] args) {
-         var plant = new Tree();
+         var plant = new AVLTree();
          plant.insert(20);
          plant.insert(2);
          plant.insert(1);
@@ -15,7 +15,7 @@ public record Main() {
          plant.insert(5);
          plant.insert(9);
 
-        plant.traverseLevelOrder();
+        System.out.println();
 
 
 
