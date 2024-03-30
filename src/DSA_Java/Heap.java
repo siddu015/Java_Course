@@ -1,7 +1,7 @@
 package DSA_Java;
 
 public class Heap {
-    private int[] items = new int[10];
+    private final int[] items = new int[10];
     private int size;
 
     public void insert(int value) {
@@ -53,6 +53,7 @@ public class Heap {
     private boolean hasLeftChild(int index) {
         return leftChildIndex(index) <= size;
     }
+
     private boolean hasRightChild(int index) {
         return rightChildIndex(index) <= size;
     }
@@ -105,5 +106,12 @@ public class Heap {
         items[first] = items[first] ^ items[second];
         items[second] = items[first] ^ items[second];
         items[first] = items[first] ^ items[second];
+    }
+
+    public int max() {
+        if(isEmpty())
+            throw new IllegalStateException();
+
+        return items[0];
     }
 }
