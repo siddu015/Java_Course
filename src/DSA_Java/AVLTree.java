@@ -61,6 +61,7 @@ public class AVLTree {
 
         return newRoot;
     }
+
     private AVLNode rotateRight(AVLNode root) {
         var newRoot = root.leftChild;
 
