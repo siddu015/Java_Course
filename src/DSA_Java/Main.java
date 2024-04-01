@@ -7,13 +7,19 @@ public record Main() {
         trie.insert("mat");
         trie.insert("mate");
         trie.insert("mates");
+        trie.insert("hello");
+        trie.insert("meter");
+        trie.insert("metric");
         trie.insert("egg");
         trie.insert("match");
         trie.insert("manipulated");
+        trie.insert("munching");
+        trie.insert("drinking");
+        trie.insert("mating");
+        trie.insert("murmuring");
 
-
-
-        System.out.println(trie.findWords(""));
+        String[] str =  {null, null};
+        System.out.println(trie.longestCommonPrefix(str));
 
     }
 } 

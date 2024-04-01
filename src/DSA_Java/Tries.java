@@ -1,11 +1,12 @@
 package DSA_Java;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
 public class Tries {
+    private int numberOfWords;
+
     private static class Node {
         private final char value;
         private final Hashtable<Character, Node> children = new Hashtable<>();
@@ -56,6 +57,8 @@ public class Tries {
             current = current.getChild(ch);
         }
         current.isEndOfWord = true;
+
+        numberOfWords++;
     }
 
     public boolean contains(String word) {
@@ -70,6 +73,27 @@ public class Tries {
         }
         return current.isEndOfWord;
     }
+
+    public boolean containsRecursive(String word) {
+        if(word == null)
+            return false;
+
+        return containsRecursive(root, word, 0);
+    }
+
+    private boolean containsRecursive(Node root, String word, int index) {
+        if(index == word.length()) {
+            return root.isEndOfWord;
+        }
+
+        var ch = word.charAt(index);
+        if(!root.hasChild(ch))
+            return false;
+
+        var child = root.getChild(ch);
+        return containsRecursive(child, word, index + 1);
+    }
+
 
     public void traverse() {
         traverse(root);
@@ -91,6 +115,7 @@ public class Tries {
     private void remove(Node root, String word, int index) {
         if(index == word.length()) {
             root.isEndOfWord = false;
+            numberOfWords--;
             return;
         }
 
@@ -139,4 +164,36 @@ public class Tries {
         return current;
     }
 
+    public int countWords(){
+        return numberOfWords;
+    }
+
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+
+        var trie = new Tries();
+        for (String str : strs) {
+            if(str == null)
+                return "";
+            trie.insert(str); // Insert all strings into the trie
+        }
+
+        return longestCommonPrefix(trie.root);
+
+    }
+
+    private String longestCommonPrefix(Node root) {
+        Node current = root;
+        StringBuilder prefix = new StringBuilder();
+
+        while (current.children.size() == 1 && !current.isEndOfWord) {
+            var ch = current.getChildren()[0].value;
+            prefix.append(ch);
+            current = current.getChild(ch);
+        }
+
+        return prefix.toString();
+    }
 }
