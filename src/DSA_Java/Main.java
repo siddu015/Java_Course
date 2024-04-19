@@ -3,23 +3,22 @@ package DSA_Java;
 
 public record Main() {
     public static void main(String[] args) {
-        var trie = new Tries();
-        trie.insert("mat");
-        trie.insert("mate");
-        trie.insert("mates");
-        trie.insert("hello");
-        trie.insert("meter");
-        trie.insert("metric");
-        trie.insert("egg");
-        trie.insert("match");
-        trie.insert("manipulated");
-        trie.insert("munching");
-        trie.insert("drinking");
-        trie.insert("mating");
-        trie.insert("murmuring");
+        Graph graph = new Graph();
+        graph.addNode("1");
+        graph.addNode("2");
+        graph.addNode("3");
+        graph.addNode("4");
+        graph.addNode("5");
 
-        String[] str =  {null, null};
-        System.out.println(trie.longestCommonPrefix(str));
+        graph.addEdge("1","2");
+        graph.addEdge("1","3");
+        graph.addEdge("1","5");
+        graph.addEdge("2","3");
+        graph.addEdge("2","4");
+        graph.addEdge("5","1");
+        graph.addEdge("5","3");
 
+//        graph.removeNode("4");
+        graph.traverseDepthFirst("0");
     }
 } 

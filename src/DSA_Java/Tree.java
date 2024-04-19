@@ -182,7 +182,6 @@ public class Tree {
         for(int i = 0; i <= height(); i++)
             for(var value :  getNodesAtDistance(i))
                 System.out.println(value);
-
     }
 
 }
