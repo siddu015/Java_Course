@@ -183,5 +183,4 @@ public class Tree {
             for(var value :  getNodesAtDistance(i))
                 System.out.println(value);
     }
-
 }

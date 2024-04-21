@@ -44,5 +44,4 @@ public class Expression {
     private boolean checkCloseBrackets(Character ch) {
         return closeBrackets.contains(ch);
     }
-        
 }

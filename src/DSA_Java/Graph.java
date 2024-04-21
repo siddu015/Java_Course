@@ -171,7 +171,6 @@ public class Graph {
 
         while(!all.isEmpty()) {
             var current = all.iterator().next();
-
             if(hasCycle(current, all, visiting, visited))
                 return true;
         }

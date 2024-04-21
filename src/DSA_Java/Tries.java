@@ -94,7 +94,6 @@ public class Tries {
         return containsRecursive(child, word, index + 1);
     }
 
-
     public void traverse() {
         traverse(root);
     }

@@ -45,5 +45,4 @@ public class PriorityQueue {
         var content = Arrays.copyOfRange(items, 0, size);
         return Arrays.toString(content);
     }
-    
 }

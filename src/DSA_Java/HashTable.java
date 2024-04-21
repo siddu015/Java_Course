@@ -64,6 +64,4 @@ public class HashTable {
     private int hash(int key) {
         return key % entries.length;
     }
-
-
 }

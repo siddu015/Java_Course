@@ -7,11 +7,13 @@ public class Array {
         public Array(int length){
             items = new int[length];
         }
+
         public void print(){
             for(int i=0;i<count;i++)
                 System.out.println(items[i]);
             // System.out.println(Arrays.toString(items));
         }
+
         public void insert(int value){
             if(count== items.length){
                 int[] newItems = new int[count *2];
@@ -22,12 +24,14 @@ public class Array {
             }
             items[count++] = value;
         }
+
         public void indexof(int item){
             int i;
             for(i=0;i<count;i++)
                 if(items[i] == item)
                     System.out.println(i);
         }
+
         public void removeAt(int index){
             if(index<0 || index >= count)
                 throw new IllegalArgumentException();
@@ -35,6 +39,7 @@ public class Array {
                     items[i] = items[i+1];
             count--;
         }
+
         public void max(){
             int m=0;
             for(int i=0;i<count;i++){
@@ -62,6 +67,7 @@ public class Array {
                 newItems[i] = items[count-i-1];
             items = newItems;
         }
+
         public void insertAt(int item,int index){
             //insert at any position
             if (index < 0 || index >= count )
@@ -79,10 +85,10 @@ public class Array {
                 items = newItems;
                 count++;
         }
+
         public static char[] toString(int[] arr) {
             return null;
         }
-    
-    }
+}
     
 

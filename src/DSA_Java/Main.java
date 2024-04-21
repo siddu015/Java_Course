@@ -4,16 +4,17 @@ package DSA_Java;
 public record Main() {
     public static void main(String[] args) {
         WeightedGraph graph = new WeightedGraph();
-        graph.add("A");
-        graph.add("B");
-        graph.add("C");
-        graph.add("D");
+//        graph.addNode("A");
+//        graph.addNode("B");
+//        graph.addNode("C");
+//        graph.addNode("D");
+//        graph.addEdge("A","B", 3);
+//        graph.addEdge("B","D", 4);
+//        graph.addEdge("C","D", 5);
+//        graph.addEdge("A","C", 1);
+//        graph.addEdge("B","C", 2);
 
-        graph.addEdge("A","B", 20);
-        graph.addEdge("C","A", 10);
-        graph.addEdge("B","C", 5);
-        graph.addEdge("D","A", 15);
-
-        graph.print();
+        var tree = graph.getMinSpanningTree();
+        tree.print();
     }
 } 

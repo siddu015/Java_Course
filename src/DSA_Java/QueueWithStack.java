@@ -37,5 +37,4 @@ public class QueueWithStack {
     public boolean isEmpty(){
         return (stack1.isEmpty() && stack2.isEmpty());
     }
-
 }

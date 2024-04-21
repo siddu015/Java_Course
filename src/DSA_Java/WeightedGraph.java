@@ -2,6 +2,7 @@ package DSA_Java;
 
 import java.util.*;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class WeightedGraph {
     private class Node {
@@ -44,7 +45,7 @@ public class WeightedGraph {
 
     private final Map<String, Node> nodes = new HashMap<>();
 
-    public void add(String label) {
+    public void addNode(String label) {
         nodes.putIfAbsent(label, new Node(label));
     }
 
@@ -70,8 +71,8 @@ public class WeightedGraph {
     }
 
     private class NodeEntry {
-        private Node node;
-        private int priority;
+        private final Node node;
+        private final int priority;
 
         public NodeEntry(Node node, int priority) {
             this.node = node;
@@ -79,8 +80,14 @@ public class WeightedGraph {
         }
     }
 
-    public int getShortestPath(String from, String to) {
+    public Path getShortestPath(String from, String to) {
         var fromNode = nodes.get(from);
+        if(fromNode == null)
+            throw new IllegalArgumentException();
+
+        var toNode = nodes.get(to);
+        if(toNode == null)
+            throw new IllegalArgumentException();
 
         Map<Node, Integer> distances = new HashMap<>();
         for(var node: nodes.values())
@@ -88,6 +95,7 @@ public class WeightedGraph {
         distances.replace(fromNode, 0);
 
         Set<Node> visited = new HashSet<>();
+        Map<Node, Node> previousNodes = new HashMap<>();
 
         PriorityQueue<NodeEntry> queue= new PriorityQueue<>(
                 Comparator.comparingInt(ne -> ne.priority)
@@ -105,12 +113,89 @@ public class WeightedGraph {
                 var newDistance = distances.get(current)  + edge.weight;
                 if(newDistance < distances.get(edge.to)){
                     distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to, current);
                     queue.add(new NodeEntry(edge.to, newDistance));
                 }
             }
         }
 
-        return  0;
+        return buildPath(previousNodes, toNode);
     }
 
+    private Path buildPath(Map<Node, Node> previousNodes, Node toNode) {
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+        var previous = previousNodes.get(toNode);
+        while(previous != null) {
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        var path = new Path();
+        while(!stack.isEmpty())
+            path.add(stack.pop().label);
+
+        return path;
+    }
+
+    public Boolean hasCycle() {
+        Set<Node> visited =  new HashSet<>();
+
+        for (var node: nodes.values()) {
+            if(!visited.contains(node) && hasCycle(node, node, visited))
+               return true;
+        }
+
+        return false;
+    }
+
+    private boolean hasCycle(Node current, Node parent, Set<Node> visited ) {
+        visited.add(current);
+
+        for(var edge: current.getEdges()) {
+            if(edge.to == parent)
+                continue;
+
+            if(visited.contains(edge.to) || hasCycle(edge.to, current, visited))
+                return true;
+        }
+
+        return false;
+    }
+
+    public WeightedGraph getMinSpanningTree() {
+        var tree = new WeightedGraph();
+
+        if(nodes.isEmpty()) return tree;
+
+        PriorityQueue<Edge> edges = new PriorityQueue<>(
+                Comparator.comparingInt(e -> e.weight)
+        );
+
+        var startNode = nodes.values().iterator().next();
+        edges.addAll(startNode.edges);
+        tree.addNode(startNode.label);
+
+        if(edges.isEmpty()) return tree;
+
+        while(tree.nodes.size() < nodes.size()) {
+            var minEdge = edges.remove();
+            var nextNode = minEdge.to;
+
+            if(tree.containsNode(nextNode.label))
+                continue;
+
+            tree.addNode(nextNode.label);
+            tree.addEdge(minEdge.from.label, nextNode.label, minEdge.weight);
+            for(var edge: nextNode.getEdges())
+                if(!tree.containsNode(edge.to.label))
+                    edges.add(edge);
+        }
+
+        return tree;
+    }
+
+    public boolean containsNode(String label){
+        return nodes.containsKey(label);
+    }
 }

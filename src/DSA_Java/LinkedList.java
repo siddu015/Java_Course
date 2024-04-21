@@ -23,9 +23,11 @@ public class LinkedList{
         }
         return null;
     }
+
     public boolean isEmpty(){
         return first==null;
     }
+
     public void addLast(int item){
         var node = new Node(item);
 
@@ -38,6 +40,7 @@ public class LinkedList{
         size++;
 
     }
+
     public void addFirst(int item){
         var node = new Node(item);
         if(isEmpty())
@@ -48,6 +51,7 @@ public class LinkedList{
         }
         size++;
     }
+
     public int indexof(int item){
         int index = 0;
         var current = first;
@@ -58,9 +62,11 @@ public class LinkedList{
         }
         return -1;   
     }
+
     public boolean contains(int item){
         return indexof(item) != -1;
     }
+
     public void deleteFirst(){
         //[1 1(2)->3] second = 2 
         if(isEmpty())
@@ -70,6 +76,7 @@ public class LinkedList{
         first = second;
         size--;
     }
+
     public void deleteLast(){
         //[1->2 3] 
         if(isEmpty())
@@ -83,10 +90,12 @@ public class LinkedList{
         current.next = null;
         last = current;
         size--;     
-    } 
+    }
+
     public int size(){
         return size;
     }
+
     public int[] toArray(){
         int[] array = new int[size];
         var current = first;
@@ -96,6 +105,7 @@ public class LinkedList{
         }
         return array;
     }
+
     public void reverse(){
         if(isEmpty()) return;
         var previous = first;
@@ -123,6 +133,7 @@ public class LinkedList{
         // last.next = null;
 
     }
+
     public int getKthFromTheEnd(int k){
         if(k<1 || k>size) throw new IllegalArgumentException();
         // int i=1;
@@ -141,6 +152,7 @@ public class LinkedList{
         }
         return a.value;
     }
+
     public void printMiddle(){                
         // var a = first;
         // var b = first;
@@ -166,6 +178,7 @@ public class LinkedList{
             if(b == last)   System.out.println(a.value);
             else            System.out.println(a.value + " and " + a.next.value);
     }
+
     public void hasLoop(){
         //[10->29->30->40->50->60]
         //              a           b 
@@ -184,8 +197,5 @@ public class LinkedList{
         }
         System.out.println("No Loop Exists");
     }
-
-
-
 }
 
