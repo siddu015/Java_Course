@@ -1,14 +1,10 @@
 package DSA_Java;
 
-
-import java.util.Arrays;
-
 public record Main() {
     public static void main(String[] args) {
-       int[] array = {5, 3, 2, 1};
-        var ass = new BucketSort();
-        ass.sort(array, 5);
-        System.out.println(Arrays.toString(array));
+       int[] array = {1, 2, 4 ,5, 6, 7};
+        var ass = new Search();
+        System.out.println(ass.ternarySearchRec(array, 5));
     }
 
 } 
