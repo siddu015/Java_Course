@@ -85,4 +85,31 @@ public class StringUtils {
 
         return String.join(" ", words);
     }
+
+    public boolean areAnagrams(String first, String second) {
+        if(first == null || second == null
+            || first.length() != second.length())
+            return false;
+
+        var array1 = first.toLowerCase().toCharArray();
+        Arrays.sort(array1);
+
+        var array2 = second.toLowerCase().toCharArray();
+        Arrays.sort(array2);
+
+        return Arrays.equals(array1, array2);
+    }
+
+    public boolean isPalindrome(String word) {
+        if(word == null)
+            return false;
+
+        var left = 0;
+        var right = word.length() - 1;
+        while (left < right)
+            if(word.charAt(left++) != word.charAt(right--))
+                return false;
+
+        return true;
+    }
 }
