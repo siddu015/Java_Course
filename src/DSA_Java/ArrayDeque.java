@@ -2,6 +2,7 @@ package DSA_Java;
 
 import java.util.Arrays;
 
+//check
 public class ArrayDeque {
 
     private int[] items;
